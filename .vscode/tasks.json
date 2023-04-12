@@ -2,38 +2,49 @@
 	"version": "2.0.0",
 	"tasks": [
         {
-            "type": "docker-build",
-            "label": "docker-build",
-            "platform": "python",
-            "dockerBuild": {
-                "tag": "testflask:latest",
-                "dockerfile": "${workspaceFolder}/Dockerfile",
-                "context": "${workspaceFolder}",
-                "pull": true
+            "label": "nerd build",
+            "type": "shell",
+            "command": "nerdctl",
+            "args": [
+                "build",
+                "-t",
+                "test-flask:latest",
+                "."
+            ],
+            "options": {
+                "env": {}
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
             }
         },
         {
-            "type": "docker-run",
-            "label": "docker-run: debug",
+            "label": "nerd build run debug",
+            "type": "shell",
             "dependsOn": [
-                "docker-build"
+                "nerd-build"
             ],
-            "dockerRun": {
+            "options": {
                 "env": {
                     "FLASK_APP": "hello_app\\__init__.py"
                 }
             },
-            "python": {
-                "args": [
-                    "run",
-                    "--no-debugger",
-                    "--no-reload",
-                    "--host",
-                    "0.0.0.0",
-                    "--port",
-                    "5000"
-                ],
-                "module": "flask"
+            "command": "nerdctl",
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "5000"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
             }
         }
     ]
