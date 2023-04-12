@@ -9,6 +9,8 @@
                 "build",
                 "-t",
                 "test-flask:latest",
+                "--namespace",
+                "k8s.io",
                 "."
             ],
             "options": {
