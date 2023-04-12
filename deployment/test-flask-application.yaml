@@ -38,3 +38,22 @@ spec:
   - port: 5000
   selector:
     app: test-flask
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-flask-ingress
+spec:
+  ingressClassName: traefik
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: test-flask
+            port:
+              number: 5000
+status:
+  loadBalancer: {}
