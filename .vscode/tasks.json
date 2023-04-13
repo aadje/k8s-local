@@ -32,7 +32,7 @@
         },
         {
             "label": "browse ingress ip",
-            "detail": "Open the Traefik Egress Controller ip in the browser",
+            "detail": "Open the Traefik Ingress Controller external ip in the browser",
             "group": { "kind": "build" },
             "type": "shell",
             "windows":{ "command": "start"},
@@ -62,7 +62,7 @@
         // test-flask app tasks
         {
             "label": "nerdctl build test-flask",
-            "detail": "Build a Docker image using the contaiNerD for test-flask",
+            "detail": "Build a Docker image using contaiNerD for test-flask",
             "group": { "kind": "build" },
             "type": "shell",
             "options": {
@@ -84,7 +84,6 @@
             "detail": "Start the test-flask app",
             "group": { "kind": "build" },
             "icon": { "id": "check-all", "color": "terminal.ansiGreen"},
-            "type": "shell",
             "dependsOn": [
                 "rdctl start",
                 "nerdctl build test-flask",
