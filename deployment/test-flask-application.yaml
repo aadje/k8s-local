@@ -43,6 +43,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: test-flask-ingress
+  namespace: test
 spec:
   ingressClassName: traefik
   rules:
