@@ -1,53 +1,98 @@
 {
+    // https://code.visualstudio.com/docs/editor/tasks
 	"version": "2.0.0",
 	"tasks": [
+        // Rancher Desktop environment tasks
         {
-            "label": "nerd build",
+            "label": "rdctl start",
+            "detail": "Start Rancher Desktop",
+            "group": { "kind": "build" },
             "type": "shell",
-            "command": "nerdctl",
-            "args": [
-                "build",
-                "-t",
-                "test-flask:latest",
-                "--namespace",
-                "k8s.io",
-                "."
-            ],
-            "options": {
-                "env": {}
-            },
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": false
-            }
+            "command": "rdctl",
+            "args": ["start", "--application.start-in-background"]
         },
         {
-            "label": "nerd build run debug",
+            "label": "kubectl apply deployment",
+            "detail": "Deploy Kubernetes objects in the Deployment folder",
+            "group": { "kind": "build" },
             "type": "shell",
-            "dependsOn": [
-                "nerd-build"
-            ],
             "options": {
-                "env": {
-                    "FLASK_APP": "hello_app\\__init__.py"
+                "cwd": "${workspaceFolder}/deployment"
+            },
+            "command": "kubectl",
+            "args": ["apply", "-f", "."]
+        },
+        {
+            "label": "kubectl restart dev",
+            "detail": "Restart all k8s Deployments in the dev namespace",
+            "group": { "kind": "build" },
+            "type": "shell",
+            "command": "kubectl",
+            "args": ["rollout", "restart", "deployment", "-n", "dev"]
+        },
+        {
+            "label": "browse ingress ip",
+            "detail": "Open the Traefik Egress Controller ip in the browser",
+            "group": { "kind": "build" },
+            "type": "shell",
+            "windows":{ "command": "start"},
+            "osx": {"command": "open"},
+            "args": [
+                {
+                  "value": "http://$(kubectl get svc -n kube-system traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')",
+                  "quoting": "weak"
                 }
+            ]
+        },
+        {
+            "label": "browse traefik dashboard",
+            "detail": "Open the Traefik Dashboard on localhost in the browser",
+            "group": { "kind": "build" },
+            "type": "shell",
+            "windows":{ "command": "start"},
+            "osx": {"command": "open"},
+            "args": [
+                {
+                  "value": "http://localhost:9000/dashboard/#/",
+                  "quoting": "weak"
+                }
+            ]
+        },
+
+        // test-flask app tasks
+        {
+            "label": "nerdctl build test-flask",
+            "detail": "Build a Docker image using the contaiNerD for test-flask",
+            "group": { "kind": "build" },
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}"
             },
             "command": "nerdctl",
-            "args": [
-                "run",
-                "--no-debugger",
-                "--no-reload",
-                "--host",
-                "0.0.0.0",
-                "--port",
-                "5000"
+            "args": ["build", "-t", "test-flask:latest", "--namespace", "k8s.io", "."]
+        },
+        {
+            "label": "kubectl restart dev test-flask",
+            "detail": "Restart the k8s test-flask Deployment in the dev namespace",
+            "group": { "kind": "build" },
+            "type": "shell",
+            "command": "kubectl",
+            "args": ["rollout", "restart", "deployment", "-n", "dev", "test-flask"]
+        },
+        {
+            "label": "build+deploy+start test-flask",
+            "detail": "Start the test-flask app",
+            "group": { "kind": "build" },
+            "icon": { "id": "check-all", "color": "terminal.ansiGreen"},
+            "type": "shell",
+            "dependsOn": [
+                "rdctl start",
+                "nerdctl build test-flask",
+                "kubectl apply deployment",
+                "kubectl restart dev test-flask",
+                "browse ingress ip"
             ],
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": false
-            }
+            "dependsOrder": "sequence"
         }
     ]
 }
