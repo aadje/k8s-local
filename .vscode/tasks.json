@@ -80,6 +80,14 @@
             "args": ["rollout", "restart", "deployment", "-n", "dev", "test-flask"]
         },
         {
+            "label": "hostctl add domain test-flask",
+            "detail": "Add domain record to your local hostsfile",
+            "group": { "kind": "build" },
+            "type": "shell",
+            "command": "hostctl",
+            "args": ["rollout", "restart", "deployment", "-n", "dev", "test-flask"]
+        },
+        {
             "label": "build+deploy+browse test-flask",
             "detail": "Run the test-flask app",
             "group": { "kind": "build" },
