@@ -80,8 +80,8 @@
             "args": ["rollout", "restart", "deployment", "-n", "dev", "test-flask"]
         },
         {
-            "label": "build+deploy+start test-flask",
-            "detail": "Start the test-flask app",
+            "label": "build+deploy+browse test-flask",
+            "detail": "Run the test-flask app",
             "group": { "kind": "build" },
             "icon": { "id": "check-all", "color": "terminal.ansiGreen"},
             "dependsOn": [
