@@ -50,3 +50,18 @@ spec:
             name: test-flask
             port:
               number: 5000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: test-flask
+  namespace: dev
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - kind: Rule
+    match: Host(`test-flask.AC1C2764.nip.io`)
+    services:
+    - name: test-flask
+      port: 5000
