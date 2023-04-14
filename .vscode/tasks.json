@@ -58,6 +58,21 @@
                 }
             ]
         },
+        {
+            "label": "hostctl add domain test-flask",
+            "detail": "Add domain records to your local hostsfile",
+            "group": { "kind": "build" },
+            "type": "shell",
+            "command": "hostctl",
+            "args": ["add", "domains", "mm", "--ip", 
+                {
+                    "value": "http://$(kubectl get svc -n kube-system traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')",
+                    "quoting": "weak"
+                },
+                "cluster.monkapps.local",
+                "test-flask.monkapps.local"
+            ]
+        },
 
         // test-flask app tasks
         {
@@ -80,12 +95,18 @@
             "args": ["rollout", "restart", "deployment", "-n", "dev", "test-flask"]
         },
         {
-            "label": "hostctl add domain test-flask",
-            "detail": "Add domain record to your local hostsfile",
+            "label": "browse test-flask.monkapps.local",
+            "detail": "Open test-flask.monkapps.local",
             "group": { "kind": "build" },
             "type": "shell",
-            "command": "hostctl",
-            "args": ["rollout", "restart", "deployment", "-n", "dev", "test-flask"]
+            "windows":{ "command": "start"},
+            "osx": {"command": "open"},
+            "args": [
+                {
+                  "value": "http://test-flask.monkapps.local",
+                  "quoting": "weak"
+                }
+            ]
         },
         {
             "label": "build+deploy+browse test-flask",
@@ -97,7 +118,7 @@
                 "nerdctl build test-flask",
                 "kubectl apply deployment",
                 "kubectl restart dev test-flask",
-                "browse ingress ip"
+                "browse test-flask.monkapps.local"
             ],
             "dependsOrder": "sequence"
         }

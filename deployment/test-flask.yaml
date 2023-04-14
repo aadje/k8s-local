@@ -40,7 +40,8 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - http:
+  - host: test-flask.monkapps.local
+    http:
       paths:
       - pathType: Prefix
         path: "/"
