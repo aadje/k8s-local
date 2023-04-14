@@ -20,7 +20,7 @@
                 "cwd": "${workspaceFolder}/deployment"
             },
             "command": "kubectl",
-            "args": ["apply", "-f", "."]
+            "args": ["apply", "-f", ".", "--context", "rancher-desktop"]
         },
         {
             "label": "kubectl restart dev",
