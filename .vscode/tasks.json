@@ -86,6 +86,18 @@
             "command": "nerdctl",
             "args": ["build", "-t", "test-flask:latest", "--namespace", "k8s.io", "."]
         },
+        // test-flask app tasks
+        {
+            "label": "docker build test-flask",
+            "detail": "Build a Docker image using moby for test-flask",
+            "group": { "kind": "build" },
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": "docker",
+            "args": ["build", "-t", "test-flask:latest", "."]
+        },
         {
             "label": "kubectl restart dev test-flask",
             "detail": "Restart the k8s test-flask Deployment in the dev namespace",
