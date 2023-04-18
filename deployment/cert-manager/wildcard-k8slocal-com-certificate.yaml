@@ -1,0 +1,20 @@
+# letsencrypt *k8slocal.com certificate
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-k8slocal-com
+  namespace: cert-manager
+spec:
+  secretName: wildcard-k8slocal-com
+  privateKey:
+    rotationPolicy: Always
+  commonName: "*.k8slocal.com"
+  dnsNames:
+    - "*.k8slocal.com"
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+  issuerRef:
+    name: acme-issuer
+    kind: Issuer

@@ -40,7 +40,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: test-flask.monkapps.local
+  - host: test-flask.k8slocal.com
     http:
       paths:
       - pathType: Prefix
@@ -61,7 +61,7 @@ spec:
     - websecure
   routes:
   - kind: Rule
-    match: Host(`test-flask.AC1C2764.nip.io`)
+    match: Host(`test-flask.k8slocal.com`)
     services:
     - name: test-flask
       port: 5000

@@ -66,11 +66,11 @@
             "command": "hostctl",
             "args": ["add", "domains", "mm", "--ip", 
                 {
-                    "value": "http://$(kubectl get svc -n kube-system traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')",
+                    "value": "$(kubectl get svc -n kube-system traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')",
                     "quoting": "weak"
                 },
-                "cluster.monkapps.local",
-                "test-flask.monkapps.local"
+                "cluster.k8slocal.com",
+                "test-flask.k8slocal.com"
             ]
         },
 
