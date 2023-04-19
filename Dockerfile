@@ -8,6 +8,10 @@ ENV \
     PYTHONDONTWRITEBYTECODE=1 \
     # Turns off buffering for easier container logging
     PYTHONUNBUFFERED=1 \
+    # PIP
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
     # Flask
     FLASK_APP=webapp
 

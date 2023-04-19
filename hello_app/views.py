@@ -1,4 +1,3 @@
-from flask import Flask
 from flask import render_template
 from datetime import datetime
 from . import app
@@ -17,7 +16,7 @@ def contact():
 
 @app.route("/hello/")
 @app.route("/hello/<name>")
-def hello_there(name = None):
+def hello_there(name: str|None = None):
     return render_template(
         "hello_there.html",
         name=name,
