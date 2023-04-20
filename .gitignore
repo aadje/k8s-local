@@ -105,4 +105,4 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
-deployment/cert-manager/acme-issuer.yaml
+acme-issuer.yaml
