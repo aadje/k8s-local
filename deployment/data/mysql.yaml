@@ -62,6 +62,7 @@ spec:
   entryPoints:
   - db
   routes:
+ #- match: Host(`cluster.k8slocal.com`)
   - match: "*"
     services:
     - name: mysql
