@@ -1,0 +1,28 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: acme-issuer
+  namespace: cert-manager
+spec:
+  acme:
+    email: arjanvanrijn@gmail.com
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
+    disableAccountKeyGeneration: false
+    privateKeySecretRef:
+      # Secret resource that will be used to store the account's private key.
+      name: acme-issuer-account-key
+    solvers:
+    - dns01:
+        azureDNS:
+          clientID: 60e9318e-cd53-4dd4-8715-8726dd039e7a
+          clientSecretSecretRef:
+            name: azuredns-config
+            key: client-secret
+          subscriptionID: fa6c5a16-7620-495b-a780-af0752989190
+          tenantID: 6ff13ec4-6f1d-42b4-9acb-85786a85c8c2
+          resourceGroupName: dns
+          hostedZoneName: k8slocal.com
+      selector:
+        dnsZones:
+        - 'k8slocal.com'
