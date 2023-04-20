@@ -1,0 +1,68 @@
+# https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: data
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:5.7
+        name: mysql
+        command: ["docker-entrypoint.sh",
+          "--character-set-server=utf8",
+          "--collation-server=utf8_general_ci",
+          "--sql-mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" ]
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: ''
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: 'yes'
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        securityContext:
+          allowPrivilegeEscalation: true
+      volumes:
+      - name: mysql-persistent-storage
+        hostPath:
+          path: /var/lib/mysql
+          type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: data
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mysql
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mysql
+  namespace: data
+spec:
+  entryPoints:
+  - db
+  routes:
+  - match: "*"
+    services:
+    - name: mysql
+      port: 3306
