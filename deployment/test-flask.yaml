@@ -58,10 +58,13 @@ metadata:
   namespace: dev
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
   - kind: Rule
     match: Host(`test-flask.k8slocal.com`)
     services:
     - name: test-flask
       port: 5000
+    middlewares:
+    - name: https-redirect-scheme
+      namespace: kube-system
