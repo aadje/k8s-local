@@ -1,0 +1,17 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    additionalArguments: 
+    - "--entrypoints.mysql.address=:3306/tcp"
+    dashboard:
+      enabled: true
+    ports:
+      traefik:
+        expose: true # Avoid this in production deployments
+    logs:
+      access:
+        enabled: true

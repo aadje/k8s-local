@@ -60,10 +60,9 @@ metadata:
   namespace: data
 spec:
   entryPoints:
-  - db
+  - mysql
   routes:
- #- match: Host(`cluster.k8slocal.com`)
-  - match: "*"
+  - match: HostSNI(`*`)
     services:
     - name: mysql
       port: 3306
