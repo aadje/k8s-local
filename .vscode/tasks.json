@@ -107,15 +107,15 @@
             "args": ["rollout", "restart", "deployment", "-n", "dev", "test-flask"]
         },
         {
-            "label": "browse test-flask.monkapps.local",
-            "detail": "Open test-flask.monkapps.local",
+            "label": "browse test-flask.k8slocal.com",
+            "detail": "Open test-flask.k8slocal.com",
             "group": { "kind": "build" },
             "type": "shell",
             "windows":{ "command": "start"},
             "osx": {"command": "open"},
             "args": [
                 {
-                  "value": "http://test-flask.monkapps.local",
+                  "value": "http://test-flask.k8slocal.com",
                   "quoting": "weak"
                 }
             ]
@@ -127,10 +127,10 @@
             "icon": { "id": "check-all", "color": "terminal.ansiGreen"},
             "dependsOn": [
                 "rdctl start",
-                "nerdctl build test-flask",
+                "docker build test-flask",
                 "kubectl apply deployment",
                 "kubectl restart dev test-flask",
-                "browse test-flask.monkapps.local"
+                "browse test-flask.k8slocal.com"
             ],
             "dependsOrder": "sequence"
         }
