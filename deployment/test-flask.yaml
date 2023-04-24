@@ -39,6 +39,7 @@ metadata:
   namespace: dev
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: kube-system-https-redirect-scheme@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
 spec:
   ingressClassName: traefik
   rules:
