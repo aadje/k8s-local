@@ -9,9 +9,13 @@ spec:
       enabled: true
     ports:
       traefik:
-        expose: true # Avoid this in production deployments
+        expose: true
       mysql:
         port: 3306
+        protocol: TCP
+        expose: true
+      redis:
+        port: 6379
         protocol: TCP
         expose: true
     logs:
