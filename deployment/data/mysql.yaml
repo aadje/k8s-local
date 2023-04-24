@@ -56,21 +56,6 @@ spec:
   selector:
     app: mysql
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: traefik-mysql
-  namespace: data
-spec:
-  ports:
-  - name: mysql
-    port: 3306
-    protocol: TCP
-    targetPort: 3306
-  selector:
-    app: traefik
-  type: LoadBalancer
----
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
 metadata:

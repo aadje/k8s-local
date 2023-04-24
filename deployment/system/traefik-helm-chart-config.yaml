@@ -5,13 +5,21 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    additionalArguments: 
-    - "--entrypoints.mysql.address=:3306/tcp"
     dashboard:
       enabled: true
     ports:
       traefik:
         expose: true # Avoid this in production deployments
+      mysql:
+        port: 3306
+        protocol: TCP
+        expose: true
     logs:
       access:
         enabled: true
+    providers:
+      kubernetesIngress:
+        publishedService:
+          enabled: true
+      kubernetescrd:
+        allowCrossNamespace: true
