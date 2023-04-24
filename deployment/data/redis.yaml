@@ -1,4 +1,4 @@
-# https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+# https://kubernetes.io/docs/tutorials/configuration/configure-redis-using-configmap/
 apiVersion: v1
 kind: ConfigMap
 metadata:

@@ -18,6 +18,14 @@ spec:
         port: 6379
         protocol: TCP
         expose: true
+      rabbitmq-http:
+        port: 15672
+        protocol: TCP
+        expose: true
+      rabbitmq-amqp:
+        port: 5672
+        protocol: TCP
+        expose: true
     logs:
       access:
         enabled: true
