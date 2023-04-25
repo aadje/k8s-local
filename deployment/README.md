@@ -11,6 +11,7 @@ kubectl apply -f ./deployment/system/traefik
 kubectl apply -f ./deployment/data
 
 kubectl apply -f ./deployment/services
+kubectl apply -f ./deployment/services/test-flask.yaml
 
 # Delete
 kubectl delete -f ./deployment/data
