@@ -39,11 +39,11 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
 metadata:
-  name: rabbitmq
+  name: amqp
   namespace: data
 spec:
   entryPoints:
-  - rabbitmq-amqp
+  - amqp
   routes:
   - match: HostSNI(`*`)
     services:
