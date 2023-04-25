@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-django
+  name: test-django
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: test-django
+  template:
+    metadata:
+      labels:
+        app: test-django
+    spec:
+      containers:
+      - image: test-django:latest
+        name: app
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-django
+  namespace: dev
+spec:
+  ports:
+  - port: 5000
+  selector:
+    app: test-django
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-django
+  namespace: dev
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-https-redirect-scheme@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: test-django.k8slocal.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: test-django
+            port:
+              number: 5000
