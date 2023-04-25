@@ -5,10 +5,14 @@ metadata:
   namespace: kube-system
 spec:
   entryPoints:
+  - web
   - websecure
   routes:
   - match: Host(`cluster.k8slocal.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
     kind: Rule
+    middlewares:
+    - name: https-redirect-scheme
+      namespace: kube-system
     services:
     - name: api@internal
       kind: TraefikService
