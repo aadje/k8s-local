@@ -50,19 +50,28 @@ spec:
     - name: rabbitmq
       port: 5672
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRouteTCP
+# RabbitMQ Web console
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: rabbitmq
   namespace: data
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-https-redirect-scheme@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
 spec:
-  entryPoints:
-  - rabbitmq-http
-  routes:
-  - match: HostSNI(`*`)
-    services:
-    - name: rabbitmq
-      port: 15672
+  ingressClassName: traefik
+  rules:
+  - host: rabbitmq.k8slocal.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: rabbitmq
+            port:
+              number: 15672
 
 
 
