@@ -4,10 +4,10 @@
 # Deploy
 kubectl apply -f system
 kubectl apply -f data
-kubectl apply -f .
+kubectl apply -f services
 
 # Delete
 kubectl delete -f data
-kubectl delete -f test-flask.yaml
+kubectl delete -f services\test-flask.yaml
 
 ```
