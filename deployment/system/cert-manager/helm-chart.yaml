@@ -1,7 +1,7 @@
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: cert-manager
+  name: kube-system
   namespace: kube-system
 spec:
   repo: "https://charts.jetstack.io"
