@@ -1,0 +1,6 @@
+resources:
+- helm-chart-config.yaml
+- default-tls-store.yaml
+- tls-option.yaml
+- middleware.yaml
+- dashboard-ingress-route.yaml

@@ -2,16 +2,16 @@
 ```powershell
 
 # Deploy
-kubectl create namespace cert-manager
-kubectl create secret generic azuredns-config -n cert-manager --from-literal="client-secret=$PASSWORD"
-kubectl apply -f ./deployment/system/cert-manager
+kubectl create secret generic azuredns-config -n kube-system --from-literal="client-secret=$PASSWORD"
+code ./deployment/system/cert-manager/acme-issuer.yaml
 
-kubectl apply -f ./deployment/system/traefik
+kubectl apply -k ./deployment/system/cert-manager
+kubectl apply -k ./deployment/system/traefik
+kubectl apply -k ./deployment/data
+kubectl apply -k ./deployment/services
 
-kubectl apply -f ./deployment/data
-
-kubectl apply -f ./deployment/services
 kubectl apply -f ./deployment/services/test-flask.yaml
+kubectl apply -f ./deployment/services/test-django.yaml
 
 # Delete
 kubectl delete -f ./deployment/data

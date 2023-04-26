@@ -1,0 +1,5 @@
+resources:
+- cert-manager.crds.yaml
+- helm-chart.yaml
+- acme-issuer.yaml
+- wildcard-k8slocal-com-certificate.yaml

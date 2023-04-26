@@ -1,0 +1,5 @@
+resources:
+- namespace.yaml
+- mysql.yaml
+- rabbitmq.yaml
+- redis.yaml
