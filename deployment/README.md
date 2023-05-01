@@ -19,4 +19,7 @@ kubectl apply -f ./deployment/services/test-django.yaml
 kubectl delete -f ./deployment/data
 kubectl delete -f ./deployment/services/test-flask.yaml
 
+## Delete mysql data and load initdb script
+wsl -d rancher-desktop rm -r "/var/lib/mysql"
+
 ```
