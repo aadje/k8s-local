@@ -2,5 +2,6 @@ resources:
 - helm-chart-config.yaml
 - default-tls-store.yaml
 - tls-option.yaml
+- basic-auth-middleware-secret.yaml
 - middleware.yaml
 - dashboard-ingress-route.yaml

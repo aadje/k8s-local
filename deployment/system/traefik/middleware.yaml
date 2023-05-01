@@ -8,16 +8,6 @@ spec:
     scheme: https
     port: "443"
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: basic-auth-middleware
-  namespace: kube-system
-type: kubernetes.io/basic-auth
-stringData:
-  username: local
-  password: test 
----
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
