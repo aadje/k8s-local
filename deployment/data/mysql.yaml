@@ -17,12 +17,13 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: mysql:5.7
+      #- image: mysql:5.7
+      - image: mysql:8
         name: mysql
         command: ["docker-entrypoint.sh",
           "--character-set-server=utf8",
           "--collation-server=utf8_general_ci",
-          "--sql-mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" ]
+          "--sql-mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION" ]
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: ''
@@ -34,6 +35,8 @@ spec:
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
+        - name: mysql-initdb
+          mountPath: /docker-entrypoint-initdb.d
         securityContext:
           allowPrivilegeEscalation: true
       volumes:
@@ -41,6 +44,9 @@ spec:
         hostPath:
           path: /var/lib/mysql
           type: DirectoryOrCreate
+      - name: mysql-initdb
+        configMap:
+          name: mysql-initdb-config
 ---
 apiVersion: v1
 kind: Service
@@ -69,6 +75,12 @@ spec:
     services:
     - name: mysql
       port: 3306
-
-
-
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-config
+  namespace: data
+data:
+  01_create_dbs.sql: |
+    create database hello_django;
