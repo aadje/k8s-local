@@ -2,22 +2,21 @@
 ```powershell
 
 # Deploy
-kubectl create secret generic azuredns-config -n kube-system --from-literal="client-secret=$PASSWORD"
-code ./deployment/system/cert-manager/acme-issuer.yaml
+code ./system/cert-manager/acme-issuer.yaml
 
-kubectl apply -f ./deployment/system/sealed-secrets-helm-chart.yaml
+kubectl apply -f ./system/sealed-secrets-helm-chart.yaml
 
-kubectl apply -k ./deployment/system/cert-manager
-kubectl apply -k ./deployment/system/traefik
-kubectl apply -k ./deployment/data
-kubectl apply -k ./deployment/services
+kubectl apply -k ./system/cert-manager
+kubectl apply -k ./system/traefik
+kubectl apply -k ./data
+kubectl apply -k ./services
 
-kubectl apply -f ./deployment/services/test-flask.yaml
-kubectl apply -f ./deployment/services/test-django.yaml
+kubectl apply -f ./services/test-flask.yaml
+kubectl apply -f ./services/test-django.yaml
 
 # Delete
-kubectl delete -f ./deployment/data
-kubectl delete -f ./deployment/services/test-flask.yaml
+kubectl delete -f ./data
+kubectl delete -f ./services/test-flask.yaml
 
 ## Delete mysql data and load initdb script
 wsl -d rancher-desktop rm -r "/var/lib/mysql"

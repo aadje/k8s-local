@@ -1,4 +1,5 @@
 resources:
+- azure-dnsconfig-secret.yaml
 - cert-manager.crds.yaml
 - helm-chart.yaml
 - acme-issuer.yaml
