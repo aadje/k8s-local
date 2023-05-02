@@ -1,4 +1,4 @@
 resources:
 - namespace.yaml
 - test-flask.yaml
-#- test-django.yaml
+- test-django.yaml

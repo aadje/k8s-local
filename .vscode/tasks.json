@@ -71,6 +71,7 @@
                 },
                 "cluster.k8slocal.com",
                 "test-flask.k8slocal.com",
+                "test-django.k8slocal.com",
                 "rabbitmq.k8slocal.com"
             ]
         },
