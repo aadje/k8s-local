@@ -59,12 +59,12 @@
             ]
         },
         {
-            "label": "hostctl add domain test-flask",
+            "label": "hostctl add domains",
             "detail": "Add domain records to your local hostsfile",
             "group": { "kind": "build" },
             "type": "shell",
-            "command": "hostctl",
-            "args": ["add", "domains", "mm", "--ip", 
+            "command": "sudo",
+            "args": ["hostctl", "add", "domains", "mm", "--ip", 
                 {
                     "value": "$(kubectl get svc -n kube-system traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}')",
                     "quoting": "weak"
