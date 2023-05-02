@@ -21,4 +21,8 @@ kubectl delete -f ./services/test-flask.yaml
 ## Delete mysql data and load initdb script
 wsl -d rancher-desktop rm -r "/var/lib/mysql"
 
+## Store lets encrypt cert for debugging
+kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.crt']}" | base64 -d > ".venv/tls.crt"
+kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > ".venv/tls.key"
+
 ```

@@ -15,7 +15,7 @@
             "justMyCode": true
         },
         {
-            "name": "Flask test",
+            "name": "Flask test localhost 5000",
             "type": "python",
             "request": "launch",
             "module": "flask",
@@ -27,6 +27,27 @@
             "args": [
                 "run",
                 "--no-debugger"
+            ],
+            "jinja": false,
+            "justMyCode": true
+        },
+        {
+            "name": "Flask test https",
+            "type": "python",
+            "request": "launch",
+            "module": "flask",
+            "cwd": "${workspaceFolder}/hello_app",
+            "env": {
+                "FLASK_APP": "webapp",
+                "FLASK_DEBUG": "1"
+            },
+            "args": [
+                "run",
+                "--no-debugger", 
+                "--host", "test-flask.k8slocal.com",
+                "--port", "443",
+                "--cert", "${workspaceFolder}/.venv/tls.crt",
+                "--key", "${workspaceFolder}/.venv/tls.key"
             ],
             "jinja": false,
             "justMyCode": true
