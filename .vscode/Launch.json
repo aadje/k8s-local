@@ -3,7 +3,19 @@
     "version": "1.0.0",
     "configurations": [
         {
-            "name": "Python: Django",
+            "name": "Django test localhost 8000",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/hello_django",
+            "program": "manage.py",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "justMyCode": true
+        },
+        {
+            "name": "Django test http",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/hello_django",
