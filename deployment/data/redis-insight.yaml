@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-insight
+  namespace: data
+  labels:
+    app: redis-insight
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-insight
+  template:
+    metadata:
+      labels:
+        app: redis-insight
+    spec:
+      containers:
+      - name:  redis-insight
+        image: redislabs/redisinsight:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        # https://docs.redis.com/latest/ri/installing/configurations/
+        - name: RITRUSTEDORIGINS
+          value: "https://redisinsight.k8slocal.com"
+        volumeMounts:
+        - name: db
+          mountPath: /db
+        ports:
+        - containerPort: 8001
+          protocol: TCP
+        livenessProbe:
+           httpGet:
+              path : /healthcheck/
+              port: 8001
+           initialDelaySeconds: 5
+           periodSeconds: 5
+           failureThreshold: 1
+      volumes:
+      - name: db
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-insight
+  namespace: data
+spec:
+  ports:
+  - port: 8001
+  selector:
+    app: redis-insight
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: redis-insight
+  namespace: data
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-https-redirect-scheme@kubernetescrd,kube-system-basic-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: redisinsight.k8slocal.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: redis-insight
+            port:
+              number: 8001
