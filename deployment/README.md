@@ -6,11 +6,16 @@ code ./system/cert-manager/acme-issuer.yaml
 
 kubectl apply -f ./system/sealed-secrets-helm-chart.yaml
 
+## Apply all 
+kubectl apply -k .
+
+## Apply groups
 kubectl apply -k ./system/cert-manager
 kubectl apply -k ./system/traefik
 kubectl apply -k ./data
 kubectl apply -k ./services
 
+## Apply service
 kubectl apply -f ./services/test-flask.yaml
 kubectl apply -f ./services/test-django.yaml
 

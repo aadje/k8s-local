@@ -1,0 +1,6 @@
+resources:
+- system/sealed-secrets-helm-chart.yaml
+- system/cert-manager
+- system/traefik
+- data
+- services
