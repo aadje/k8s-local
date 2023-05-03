@@ -22,6 +22,10 @@ spec:
         port: 5672
         protocol: TCP
         expose: true
+      amqp:
+        port: 9092
+        protocol: TCP
+        expose: true
     logs:
       access:
         enabled: true
