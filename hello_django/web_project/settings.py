@@ -33,6 +33,7 @@ STATIC_ROOT = BASE_DIR / 'static_collected'
 
 INSTALLED_APPS = [
     'hello',
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

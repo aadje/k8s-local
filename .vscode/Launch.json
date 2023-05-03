@@ -15,13 +15,14 @@
             "justMyCode": true
         },
         {
-            "name": "Django test http",
+            // python -m manage runserver_plus --cert-file ../.venv/tls.crt --key-file ../.venv/tls.key test-django.k8slocal.com:443
+            "name": "Django test https",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/hello_django",
             "program": "manage.py",
             "args": [
-                "runserver"
+                "runserver_plus", "--cert-file", "../.venv/tls.crt", "--key-file", "../.venv/tls.key", "test-django.k8slocal.com:443"
             ],
             "django": true,
             "justMyCode": true
