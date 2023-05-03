@@ -110,3 +110,6 @@ GitHub.sublime-settings
 # Django
 static_collected/
 *.sqlite3
+*.crt
+*.key
+*.pfx
