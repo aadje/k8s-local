@@ -1,48 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zookeeper
-  namespace: data
-spec:
-  selector:
-    matchLabels:
-      app: zookeeper
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: zookeeper
-    spec:
-      containers:
-      - image: confluentinc/cp-zookeeper:4.1.4
-        name: zookeeper
-        env:
-        - name: ZOOKEEPER_CLIENT_PORT
-          value: "2181"
-        - name: ZOOKEEPER_TICK_TIME
-          value: "2000"
-        ports:
-        - containerPort: 2181
-          name: zookeeper
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: zookeeper
-  namespace: data
-spec:
-  ports:
-  - name: zookeeper
-    port: 2181
-    protocol: TCP
-    targetPort: 2181
-  selector:
-    app: zookeeper
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: kafka
   namespace: data
 spec:
@@ -56,6 +14,7 @@ spec:
       labels:
         app: kafka
     spec:
+      enableServiceLinks: false
       containers:
       - image: confluentinc/cp-kafka:4.1.4
         name: kafka

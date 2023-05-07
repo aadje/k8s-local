@@ -3,3 +3,4 @@ resources:
 - mysql.yaml
 - rabbitmq.yaml
 - redis.yaml
+- kafka

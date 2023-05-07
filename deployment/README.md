@@ -21,6 +21,7 @@ kubectl apply -f ./system/sealed-secrets-helm-chart.yaml
 kubectl apply -k ./system/cert-manager
 kubectl apply -k ./system/traefik
 kubectl apply -k ./data
+kubectl apply -k ./data/kafka
 kubectl apply -k ./services
 
 ## Apply per services
