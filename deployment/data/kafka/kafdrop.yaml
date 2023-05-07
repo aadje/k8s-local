@@ -1,45 +1,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redpanda
+  name: kafdrop
   namespace: data
 spec:
   selector:
     matchLabels:
-      app: redpanda
+      app: kafdrop
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: redpanda
+        app: kafdrop
     spec:
       containers:
-      - image: docker.redpanda.com/redpandadata/console:v2.2.3
-        name: redpanda-console
+      - image: obsidiandynamics/kafdrop
+        name: kafdrop
         env:
-        - name: KAFKA_BROKERS
+        - name: KAFKA_BROKERCONNECT
           value: "kafka:9092"
+        - name: JVM_OPTS
+          value: "-Xms32M -Xmx64M"
+        - name: SERVER_SERVLET_CONTEXTPATH
+          value: "/"
         ports:
-        - containerPort: 8080
-          name: redpanda
-          hostPort: 8080
+        - containerPort: 9000
+          name: kafdrop
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: redpanda
+  name: kafdrop
   namespace: data
 spec:
   ports:
-  - port: 8080
+  - name: kafdrop
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
   selector:
-    app: redpanda
+    app: kafdrop
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: redpanda
+  name: kafdrop
   namespace: data
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: kube-system-https-redirect-scheme@kubernetescrd
@@ -47,13 +53,14 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: redpanda.k8slocal.com
+  - host: kafdrop.k8slocal.com
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: redpanda
+            name: kafdrop
             port:
-              number: 8080
+              number: 9000
+

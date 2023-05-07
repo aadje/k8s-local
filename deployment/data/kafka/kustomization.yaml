@@ -2,3 +2,4 @@ resources:
 - zookeeper.yaml
 - kafka.yaml
 - redpanda.yaml
+- kafdrop.yaml
