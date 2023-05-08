@@ -3,6 +3,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: secured-chain
+  namespace: kube-system
 spec:
   chain:
     middlewares:
@@ -13,6 +14,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: protected-chain
+  namespace: kube-system
 spec:
   chain:
     middlewares:
