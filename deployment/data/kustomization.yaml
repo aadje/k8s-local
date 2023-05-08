@@ -4,3 +4,4 @@ resources:
 - rabbitmq.yaml
 - redis.yaml
 - kafka
+- elasticsearch.yaml

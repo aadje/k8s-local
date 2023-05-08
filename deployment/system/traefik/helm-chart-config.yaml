@@ -26,6 +26,10 @@ spec:
         port: 9092
         protocol: TCP
         expose: true
+      elasticsearch:
+        port: 9200
+        protocol: TCP
+        expose: true
     logs:
       access:
         enabled: true

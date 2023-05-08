@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch6
+  namespace: data
+spec:
+  selector:
+    matchLabels:
+      app: elasticsearch6
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: elasticsearch6
+    spec:
+      containers:
+      - image: docker.elastic.co/elasticsearch/elasticsearch:6.8.4
+        name: elasticsearch6
+        env:
+        - name: discovery.type
+          value: "single-node"
+        ports:
+        - containerPort: 9200
+          name: http
+        - containerPort: 9300
+          name: tcp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch6
+  namespace: data
+spec:
+  ports:
+  - name: http
+    port: 9200
+    protocol: TCP
+    targetPort: 9200
+  - name: tcp
+    port: 9300
+    protocol: TCP
+    targetPort: 9300
+  selector:
+    app: elasticsearch6
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: elasticsearch6
+  namespace: data
+spec:
+  entryPoints:
+  - elasticsearch
+  routes:
+  - match: HostSNI(`*`)
+    services:
+    - name: elasticsearch6
+      port: 9200
+    middlewares:
+    - name: ip-whitelist-tcp
