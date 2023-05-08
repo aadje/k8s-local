@@ -77,6 +77,8 @@ spec:
     services:
     - name: redis
       port: 6379
+    middlewares:
+    - name: ip-whitelist-tcp
 
 
 

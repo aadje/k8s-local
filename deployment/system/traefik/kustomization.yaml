@@ -4,4 +4,5 @@ resources:
 - tls-option.yaml
 - basic-auth-middleware-secret.yaml
 - middleware.yaml
+- middleware-tcp.yaml
 - dashboard-ingress-route.yaml

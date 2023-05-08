@@ -75,6 +75,8 @@ spec:
     services:
     - name: mysql
       port: 3306
+    middlewares:
+    - name: ip-whitelist-tcp
 ---
 apiVersion: v1
 kind: ConfigMap

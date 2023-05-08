@@ -57,7 +57,7 @@ metadata:
   name: redis-insight
   namespace: data
   annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: kube-system-https-redirect-scheme@kubernetescrd,kube-system-basic-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-secured-chain@kubernetescrd,kube-system-protected-chain@kubernetescrd
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
 spec:
   ingressClassName: traefik

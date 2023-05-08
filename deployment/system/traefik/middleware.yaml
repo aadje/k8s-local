@@ -1,3 +1,24 @@
+# Traefik Middleware can be shared between namespaces
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: secured-chain
+spec:
+  chain:
+    middlewares:
+    - name: https-redirect-scheme
+    - name: headers
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: protected-chain
+spec:
+  chain:
+    middlewares:
+    - name: basic-auth
+    - name: ip-whitelist
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
@@ -11,8 +32,44 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
+  name: headers
+  namespace: kube-system
+spec:
+  headers:
+    customResponseHeaders:
+      server: ""                                          # Removes: server: gunicorn
+    customFrameOptionsValue: SAMEORIGIN                   # X-Frame-Options: SAMEORIGIN
+    contentTypeNosniff: true                              # # X-Content-Type-Options: nosniff
+    browserXssFilter: true                                # X-XSS-Protection: 1; mode=block
+    referrerPolicy: strict-origin-when-cross-origin       # Referrer-Policy: strict-origin-when-cross-origin 
+    forceSTSHeader: true                                  # Strict-Transport-Security: max-age=63072000; includeSubDomains
+    stsSeconds: 63072000      
+    stsIncludeSubdomains: true
+    addVaryHeader: true                                   # Cors headers
+    accessControlAllowMethods:
+      - "*"
+    accessControlAllowHeaders: 
+      - "*"
+    accessControlAllowOriginListRegex: 
+      - "https://(.*)\\.k8slocal\\.com"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
   name: basic-auth
   namespace: kube-system
 spec:
   basicAuth:
     secret: basic-auth-middleware
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: ip-whitelist
+  namespace: kube-system
+spec:
+  ipWhiteList:
+    sourceRange:
+      - 127.0.0.1/32
+      - 10.0.0.0/8
+      - 192.168.0.0/16

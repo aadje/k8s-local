@@ -64,3 +64,5 @@ spec:
     services:
     - name: kafka
       port: 9092
+    middlewares:
+    - name: ip-whitelist-tcp
