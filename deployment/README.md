@@ -41,6 +41,6 @@ kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls
 kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > ".venv/tls.key"
 
 # Add Hostsfile entries using hostsfile script
-hf add cluster,mysql,rabbitmq,kafka,kafdrop,redpanda,test-django,test-flask
+hf add cluster,mysql,rabbitmq,redis,kafka,kafdrop,redpanda,test-django,test-flask
 
 ```

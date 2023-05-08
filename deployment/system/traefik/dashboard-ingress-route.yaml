@@ -8,13 +8,23 @@ spec:
   - web
   - websecure
   routes:
-  - match: Host(`cluster.k8slocal.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+  - match: Host(`traefik.k8slocal.com`)
     kind: Rule
     middlewares:
     - name: secured-chain
-      namespace: kube-system
     - name: protected-chain
-      namespace: kube-system
+    - name: dashboard-redirect
     services:
     - name: api@internal
       kind: TraefikService
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: dashboard-redirect
+  namespace: kube-system
+spec:
+  redirectRegex:
+    regex: ^https://traefik.k8slocal.com$
+    replacement: https://traefik.k8slocal.com/dashboard/#/
+    permanent: true
