@@ -40,8 +40,7 @@ wsl -d rancher-desktop rm -r "/var/lib/mysql"
 kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.crt']}" | base64 -d > ".venv/tls.crt"
 kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > ".venv/tls.key"
 
-hf add cluster.k8slocal.com, mysql.k8slocal.com, rabbitmq.k8slocal.com, kafka.k8slocal.com, kafdrop.k8slocal.com, redpanda.k8slocal.com
-hf add test-django.k8slocal.com, test-flask.k8slocal.com
-
+# Add Hostsfile entries using hostsfile script
+hf add cluster,mysql,rabbitmq,kafka,kafdrop,redpanda,test-django,test-flask
 
 ```
