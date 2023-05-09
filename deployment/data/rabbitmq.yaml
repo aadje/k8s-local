@@ -59,7 +59,7 @@ metadata:
   name: rabbitmq
   namespace: data
   annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: kube-system-secured-chain@kubernetescrd,kube-system-protected-chain@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-secured-chain@kubernetescrd,kube-system-ip-whitelist@kubernetescrd
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
 spec:
   ingressClassName: traefik
