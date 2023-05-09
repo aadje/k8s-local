@@ -113,3 +113,7 @@ static_collected/
 *.crt
 *.key
 *.pfx
+
+# Dotnet
+bin/
+obj/

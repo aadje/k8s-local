@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-asp
+  name: test-asp
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: test-asp
+  template:
+    metadata:
+      labels:
+        app: test-asp
+    spec:
+      containers:
+      - image: test-asp:latest
+        name: app
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-asp
+  namespace: dev
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: test-asp
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-asp
+  namespace: dev
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-secured-chain@kubernetescrd,kube-system-protected-chain@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: test-asp.k8slocal.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: test-asp
+            port:
+              number: 80
