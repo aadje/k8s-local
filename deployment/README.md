@@ -41,6 +41,11 @@ kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls
 kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > ".venv/tls.key"
 
 # Add Hostsfile entries using hostsfile script
-hf add cluster,mysql,rabbitmq,redis,kafka,kafdrop,redpanda,test-django,test-flask
+hf add traefik,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda,test-django,test-flask
+
+# Test tcp routes
+redis-cli -h redis.k8slocal.com
+curl http://elasticsearch6.k8slocal.com:9200
+mysql -h mysql.k8slocal.com -u root
 
 ```
