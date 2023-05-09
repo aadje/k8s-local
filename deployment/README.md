@@ -40,7 +40,7 @@ wsl -d rancher-desktop rm -r "/var/lib/mysql"
 kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.crt']}" | base64 -d > ".venv/tls.crt"
 kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > ".venv/tls.key"
 
-# Add Hostsfile entries using hostsfile script
+# Add Hostsfile entries using hostsfile script from https://gist.github.com/aadje/a906790b4b111c03acd81d07bc446756
 hf add traefik,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda,test-django,test-flask
 
 # Test tcp routes

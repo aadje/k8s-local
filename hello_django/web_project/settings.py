@@ -87,7 +87,7 @@ DATABASES = {
         "NAME": "hello_django",
         "USER": "root",
         "PASSWORD": "",
-        "HOST": "cluster.k8slocal.com",
+        "HOST": "mysql.k8slocal.com",
         "PORT": "3306"
     }
 }
