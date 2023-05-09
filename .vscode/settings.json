@@ -42,6 +42,7 @@
         "reportOptionalContextManager"          : "information"
     },
     "python.analysis.typeCheckingMode": "strict",
+    "python.linting.flake8Enabled": true,
     "flake8.args": [
         "--ignore=E501", // Long lines
     ]
