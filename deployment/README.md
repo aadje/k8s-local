@@ -1,5 +1,5 @@
 
-```powershell
+```sh
 
 # Deploy
 ## Sealed secrets TLS secret key pair
@@ -25,6 +25,13 @@ kubectl apply -k ./data/kafka
 kubectl apply -k ./services
 
 ## Apply per services
+
+docker build -t test-flask:latest ../hello_flask
+docker build -t test-django:latest ../hello_django
+docker build -t test-asp:latest ../hello_asp 
+
+kubectl rollout restart deployment -n dev
+
 kubectl apply -f ./services/test-flask.yaml
 kubectl apply -f ./services/test-django.yaml
 kubectl apply -f ./services/test-asp.yaml

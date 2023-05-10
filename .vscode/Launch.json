@@ -62,7 +62,7 @@
             "type": "python",
             "request": "launch",
             "module": "flask",
-            "cwd": "${workspaceFolder}/hello_app",
+            "cwd": "${workspaceFolder}/hello_flask/hello_app",
             "env": {
                 "FLASK_APP": "webapp",
                 "FLASK_DEBUG": "1"
@@ -79,7 +79,7 @@
             "type": "python",
             "request": "launch",
             "module": "flask",
-            "cwd": "${workspaceFolder}/hello_app",
+            "cwd": "${workspaceFolder}/hello_flask/hello_app",
             "env": {
                 "FLASK_APP": "webapp",
                 "FLASK_DEBUG": "1"
