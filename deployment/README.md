@@ -44,11 +44,11 @@ kubectl delete -f ./services/test-flask.yaml
 wsl -d rancher-desktop rm -r "/var/lib/mysql"
 
 ## Store let's encrypt cert for local debugging
-kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.crt']}" | base64 -d > ".venv/tls.crt"
-kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > ".venv/tls.key"
+kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.crt']}" | base64 -d > "env/tls.crt"
+kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > "env/tls.key"
 
 ## Convert PKCS#1 key to PKCS#8 formatted key with password for ASP
-openssl pkcs8 -inform PEM -topk8 -in .venv/tls.key -out .venv/tls-pkcs8.key -passin pass:123 -passout pass:123
+openssl pkcs8 -inform PEM -topk8 -in env/tls.key -out env/tls-pkcs8.key -passin pass:123 -passout pass:123
 
 # Add Hostsfile entries using hostsfile script from https://gist.github.com/aadje/a906790b4b111c03acd81d07bc446756
 hf add traefik,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda,test-django,test-flask
