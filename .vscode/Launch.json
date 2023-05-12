@@ -45,14 +45,14 @@
             "justMyCode": true
         },
         {
-            // python -m manage runserver_plus --cert-file ../.venv/tls.crt --key-file ../.venv/tls.key test-django.k8slocal.com:443
+            // python -m manage runserver_plus --cert-file ../env/tls.crt --key-file ../env/tls.key test-django.k8slocal.com:443
             "name": "Django test https",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/hello_django",
             "program": "manage.py",
             "args": [
-                "runserver_plus", "--cert-file", "../.venv/tls.crt", "--key-file", "../.venv/tls.key", "test-django.k8slocal.com:443"
+                "runserver_plus", "--cert-file", "../env/tls.crt", "--key-file", "../env/tls.key", "test-django.k8slocal.com:443"
             ],
             "django": true,
             "justMyCode": true
@@ -75,6 +75,7 @@
             "justMyCode": true
         },
         {
+            // flask run --host test-flask.k8slocal.com --port 443 --cert ../../env/tls.crt --key ../../env/tls.key
             "name": "Flask test https",
             "type": "python",
             "request": "launch",
@@ -89,8 +90,8 @@
                 "--no-debugger", 
                 "--host", "test-flask.k8slocal.com",
                 "--port", "443",
-                "--cert", "${workspaceFolder}/.venv/tls.crt",
-                "--key", "${workspaceFolder}/.venv/tls.key"
+                "--cert", "${workspaceFolder}/env/tls.crt",
+                "--key", "${workspaceFolder}/env/tls.key"
             ],
             "jinja": false,
             "justMyCode": true
@@ -110,5 +111,29 @@
                 "projectType": "flask"
             }
         }
-    ]
+    ],
+    "inputs": [
+        {
+          "type": "pickString",
+          "id": "componentType",
+          "description": "What type of component do you want to create?",
+          "options": [
+            "component",
+            "directive",
+            "pipe",
+            "service",
+            "class",
+            "guard",
+            "interface",
+            "enum"
+          ],
+          "default": "component"
+        },
+        {
+          "type": "promptString",
+          "id": "componentName",
+          "description": "Name your component.",
+          "default": "my-new-component"
+        }
+      ]    
 }
