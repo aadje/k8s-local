@@ -5,6 +5,10 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    image:
+      name: rancher/mirrored-library-traefik
+      # Update the default 2.9.4 Traefik k3s versions to 2.9.10. Traefik 2.10 requires new CRD's
+      tag: 2.9.10
     dashboard:
       enabled: true
     ports:
