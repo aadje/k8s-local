@@ -42,6 +42,7 @@ kubectl delete -f ./services/hello-flask.yaml
 
 ## Delete mysql data and load initdb script
 wsl -d rancher-desktop rm -r "/var/lib/mysql"
+python manage.py migrate
 
 ## Store let's encrypt cert for local debugging
 kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.crt']}" | base64 -d > "../env/tls.crt"
