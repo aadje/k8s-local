@@ -8,8 +8,6 @@ metadata:
 spec:
   ports:
   - port: 443
-  selector:
-    app: hello-flask-external
   type: ExternalName
   externalName: 127.0.0.1
 ---

@@ -41,5 +41,9 @@ spec:
       kubernetesIngress:
         publishedService:
           enabled: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
       kubernetescrd:
         allowCrossNamespace: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
