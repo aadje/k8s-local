@@ -75,6 +75,8 @@ python -m manage runserver_plus
 python -m manage runserver_plus hello-django.k8slocal.com:80
 python -m manage runserver_plus --cert-file ../env/tls.crt --key-file ../env/tls.key hello-django.k8slocal.com:443
 
+# Trigger new cert
+cmctl renew wildcard-k8slocal-com -n kube-system
 
 
 ```
