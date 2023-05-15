@@ -59,4 +59,22 @@ redis-cli -h redis.k8slocal.com
 curl http://elasticsearch6.k8slocal.com:9200
 mysql -h mysql.k8slocal.com -u root
 
+# Test Apps
+## Flask
+cd hello_flask/hello_app
+poetry shell
+$env:FLASK_APP = "webapp"
+flask run
+flask run --host hello-flask.k8slocal.com --port 80
+flask run --host hello-flask.k8slocal.com --port 443 --cert ../../env/tls.crt --key ../../env/tls.key
+
+## Django
+cd hello_django
+poetry shell
+python -m manage runserver_plus
+python -m manage runserver_plus hello-django.k8slocal.com:80
+python -m manage runserver_plus --cert-file ../env/tls.crt --key-file ../env/tls.key hello-django.k8slocal.com:443
+
+
+
 ```
