@@ -33,7 +33,7 @@
             "request": "attach"
         },
         {
-            "name": "Django test localhost 8000",
+            "name": "Django hello localhost 8000",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/hello_django",
@@ -45,20 +45,20 @@
             "justMyCode": true
         },
         {
-            // python -m manage runserver_plus --cert-file ../env/tls.crt --key-file ../env/tls.key test-django.k8slocal.com:443
-            "name": "Django test https",
+            // python -m manage runserver_plus --cert-file ../env/tls.crt --key-file ../env/tls.key hello-django.k8slocal.com:443
+            "name": "Django hello https",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/hello_django",
             "program": "manage.py",
             "args": [
-                "runserver_plus", "--cert-file", "../env/tls.crt", "--key-file", "../env/tls.key", "test-django.k8slocal.com:443"
+                "runserver_plus", "--cert-file", "../env/tls.crt", "--key-file", "../env/tls.key", "hello-django.k8slocal.com:443"
             ],
             "django": true,
             "justMyCode": true
         },
         {
-            "name": "Flask test localhost 5000",
+            "name": "Flask hello localhost 5000",
             "type": "python",
             "request": "launch",
             "module": "flask",
@@ -75,8 +75,8 @@
             "justMyCode": true
         },
         {
-            // flask run --host test-flask.k8slocal.com --port 443 --cert ../../env/tls.crt --key ../../env/tls.key
-            "name": "Flask test https",
+            // flask run --host hello-flask.k8slocal.com --port 443 --cert ../../env/tls.crt --key ../../env/tls.key
+            "name": "Flask hello https",
             "type": "python",
             "request": "launch",
             "module": "flask",
@@ -88,7 +88,7 @@
             "args": [
                 "run",
                 "--no-debugger", 
-                "--host", "test-flask.k8slocal.com",
+                "--host", "hello-flask.k8slocal.com",
                 "--port", "443",
                 "--cert", "${workspaceFolder}/env/tls.crt",
                 "--key", "${workspaceFolder}/env/tls.key"
