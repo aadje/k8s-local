@@ -1,0 +1,6 @@
+resources:
+- namespace.yaml
+- hello-flask.yaml
+- hello-django.yaml
+- hello-asp.yaml
+- hello-flask-external-api.yaml

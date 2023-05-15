@@ -1,6 +1,0 @@
-resources:
-- namespace.yaml
-- test-flask.yaml
-- test-django.yaml
-- test-asp.yaml
-- test-flask-external-api.yaml

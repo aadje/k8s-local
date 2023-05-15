@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: test-django
-  name: test-django
-  namespace: dev
+    app: hello-django
+  name: hello-django
+  namespace: lcl
 spec:
   selector:
     matchLabels:
-      app: test-django
+      app: hello-django
   template:
     metadata:
       labels:
-        app: test-django
+        app: hello-django
     spec:
       containers:
-      - image: test-django:latest
+      - image: hello-django:latest
         name: app
         imagePullPolicy: Never
         ports:
@@ -24,32 +24,32 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: test-django
-  namespace: dev
+  name: hello-django
+  namespace: lcl
 spec:
   ports:
   - port: 8000
   selector:
-    app: test-django
+    app: hello-django
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: test-django
-  namespace: dev
+  name: hello-django
+  namespace: lcl
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: kube-system-secured-chain@kubernetescrd,kube-system-protected-chain@kubernetescrd
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
 spec:
   ingressClassName: traefik
   rules:
-  - host: test-django.k8slocal.com
+  - host: hello-django.k8slocal.com
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: test-django
+            name: hello-django
             port:
               number: 8000

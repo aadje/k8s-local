@@ -70,128 +70,128 @@
                     "quoting": "weak"
                 },
                 "cluster.k8slocal.com",
-                "test-flask.k8slocal.com",
-                "test-django.k8slocal.com",
+                "hello-flask.k8slocal.com",
+                "hello-django.k8slocal.com",
                 "rabbitmq.k8slocal.com"
             ]
         },
 
-        // test-flask app tasks
+        // hello-flask app tasks
         {
-            "label": "nerdctl build test-flask",
-            "detail": "Build a Docker image using contaiNerD for test-flask",
+            "label": "nerdctl build hello-flask",
+            "detail": "Build a Docker image using contaiNerD for hello-flask",
             "group": { "kind": "build" },
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "command": "nerdctl",
-            "args": ["build", "-t", "test-flask:latest", "--namespace", "k8s.io", "."]
+            "args": ["build", "-t", "hello-flask:latest", "--namespace", "k8s.io", "."]
         },
         {
-            "label": "docker build test-flask",
-            "detail": "Build a Docker image using moby for test-flask",
+            "label": "docker build hello-flask",
+            "detail": "Build a Docker image using moby for hello-flask",
             "group": { "kind": "build" },
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "command": "docker",
-            "args": ["build", "-t", "test-flask:latest", "."]
+            "args": ["build", "-t", "hello-flask:latest", "."]
         },
         {
-            "label": "kubectl restart dev test-flask",
-            "detail": "Restart the k8s test-flask Deployment in the dev namespace",
+            "label": "kubectl restart dev hello-flask",
+            "detail": "Restart the k8s hello-flask Deployment in the dev namespace",
             "group": { "kind": "build" },
             "type": "shell",
             "command": "kubectl",
-            "args": ["rollout", "restart", "deployment", "-n", "dev", "test-flask"]
+            "args": ["rollout", "restart", "deployment", "-n", "dev", "hello-flask"]
         },
         {
-            "label": "browse test-flask.k8slocal.com",
-            "detail": "Open test-flask.k8slocal.com",
+            "label": "browse hello-flask.k8slocal.com",
+            "detail": "Open hello-flask.k8slocal.com",
             "group": { "kind": "build" },
             "type": "shell",
             "windows":{ "command": "start"},
             "osx": {"command": "open"},
             "args": [
                 {
-                  "value": "http://test-flask.k8slocal.com",
+                  "value": "http://hello-flask.k8slocal.com",
                   "quoting": "weak"
                 }
             ]
         },
         {
-            "label": "build+deploy+browse test-flask",
-            "detail": "Run the test-flask app",
+            "label": "build+deploy+browse hello-flask",
+            "detail": "Run the hello-flask app",
             "group": { "kind": "build" },
             "icon": { "id": "check-all", "color": "terminal.ansiGreen"},
             "dependsOn": [
                 "rdctl start",
-                "docker build test-flask",
+                "docker build hello-flask",
                 "kubectl apply deployment",
-                "kubectl restart dev test-flask",
-                "browse test-flask.k8slocal.com"
+                "kubectl restart dev hello-flask",
+                "browse hello-flask.k8slocal.com"
             ],
             "dependsOrder": "sequence"
         },
 
 
-        // test-Django app tasks
+        // hello-Django app tasks
         {
-            "label": "nerdctl build test-django",
-            "detail": "Build a Docker image using contaiNerD for test-django",
+            "label": "nerdctl build hello-django",
+            "detail": "Build a Docker image using contaiNerD for hello-django",
             "group": { "kind": "build" },
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "command": "nerdctl",
-            "args": ["build", "-t", "test-django:latest", "--namespace", "k8s.io", "."]
+            "args": ["build", "-t", "hello-django:latest", "--namespace", "k8s.io", "."]
         },
         {
-            "label": "docker build test-django",
-            "detail": "Build a Docker image using moby for test-django",
+            "label": "docker build hello-django",
+            "detail": "Build a Docker image using moby for hello-django",
             "group": { "kind": "build" },
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}/hello_django"
             },
             "command": "docker",
-            "args": ["build", "-t", "test-django:latest", "."]
+            "args": ["build", "-t", "hello-django:latest", "."]
         },
         {
-            "label": "kubectl restart dev test-django",
-            "detail": "Restart the k8s test-django Deployment in the dev namespace",
+            "label": "kubectl restart dev hello-django",
+            "detail": "Restart the k8s hello-django Deployment in the dev namespace",
             "group": { "kind": "build" },
             "type": "shell",
             "command": "kubectl",
-            "args": ["rollout", "restart", "deployment", "-n", "dev", "test-django"]
+            "args": ["rollout", "restart", "deployment", "-n", "dev", "hello-django"]
         },
         {
-            "label": "browse test-django.k8slocal.com",
-            "detail": "Open test-django.k8slocal.com",
+            "label": "browse hello-django.k8slocal.com",
+            "detail": "Open hello-django.k8slocal.com",
             "group": { "kind": "build" },
             "type": "shell",
             "windows":{ "command": "start"},
             "osx": {"command": "open"},
             "args": [
                 {
-                  "value": "http://test-django.k8slocal.com",
+                  "value": "http://hello-django.k8slocal.com",
                   "quoting": "weak"
                 }
             ]
         },
         {
-            "label": "build+deploy+browse test-django",
-            "detail": "Run the test-django app",
+            "label": "build+deploy+browse hello-django",
+            "detail": "Run the hello-django app",
             "group": { "kind": "build" },
             "icon": { "id": "check-all", "color": "terminal.ansiGreen"},
             "dependsOn": [
-                "docker build test-django",
+                "docker build hello-django",
                 "kubectl apply deployment",
-                "kubectl restart dev test-django",
-                "browse test-django.k8slocal.com"
+                "kubectl restart dev hello-django",
+                "browse hello-django.k8slocal.com"
             ],
             "dependsOrder": "sequence"
         }

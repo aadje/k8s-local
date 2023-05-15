@@ -26,32 +26,32 @@ kubectl apply -k ./services
 
 ## Apply per services
 
-docker build -t test-flask:latest ../hello_flask
-docker build -t test-django:latest ../hello_django
-docker build -t test-asp:latest ../hello_asp 
+docker build -t hello-flask:latest ../hello_flask
+docker build -t hello-django:latest ../hello_django
+docker build -t hello-asp:latest ../hello_asp 
 
-kubectl rollout restart deployment -n dev
+kubectl rollout restart deployment -n lcl
 
-kubectl apply -f ./services/test-flask.yaml
-kubectl apply -f ./services/test-django.yaml
-kubectl apply -f ./services/test-asp.yaml
+kubectl apply -f ./services/hello-flask.yaml
+kubectl apply -f ./services/hello-django.yaml
+kubectl apply -f ./services/hello-asp.yaml
 
 # Delete
 kubectl delete -f ./data
-kubectl delete -f ./services/test-flask.yaml
+kubectl delete -f ./services/hello-flask.yaml
 
 ## Delete mysql data and load initdb script
 wsl -d rancher-desktop rm -r "/var/lib/mysql"
 
 ## Store let's encrypt cert for local debugging
-kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.crt']}" | base64 -d > "env/tls.crt"
-kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > "env/tls.key"
+kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.crt']}" | base64 -d > "../env/tls.crt"
+kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls\.key']}" | base64 -d > "../env/tls.key"
 
 ## Convert PKCS#1 key to PKCS#8 formatted key with password for ASP
-openssl pkcs8 -inform PEM -topk8 -in env/tls.key -out env/tls-pkcs8.key -passin pass:123 -passout pass:123
+openssl pkcs8 -inform PEM -topk8 -in ../env/tls.key -out ../env/tls-pkcs8.key -passin pass:123 -passout pass:123
 
 # Add Hostsfile entries using hostsfile script from https://gist.github.com/aadje/a906790b4b111c03acd81d07bc446756
-hf add traefik,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda,test-django,test-flask
+hf add traefik,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda,hello-django,hello-flask,hello-asp -f
 
 # Test tcp routes
 redis-cli -h redis.k8slocal.com
