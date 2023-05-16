@@ -4,3 +4,4 @@ resources:
 - hello-django.yaml
 - hello-asp.yaml
 - hello-flask-external-api.yaml
+- hello-nextjs.yaml

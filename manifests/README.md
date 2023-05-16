@@ -29,12 +29,14 @@ kubectl apply -k ./services
 docker build -t hello-flask:latest ../hello_flask
 docker build -t hello-django:latest ../hello_django
 docker build -t hello-asp:latest ../hello_asp 
+docker build -t hello-nextjs:latest ../hello_nextjs
 
 kubectl rollout restart deployment -n lcl
 
 kubectl apply -f ./services/hello-flask.yaml
 kubectl apply -f ./services/hello-django.yaml
 kubectl apply -f ./services/hello-asp.yaml
+kubectl apply -f ./services/hello-nextjs.yaml
 
 # Delete
 kubectl delete -f ./data
