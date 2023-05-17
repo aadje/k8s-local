@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: MiddlewareTCP
 metadata:
-  name: ip-whitelist-tcp
+  name: ip-whitelist-tcp-kube-system
   namespace: kube-system
 spec:
   ipWhiteList:
@@ -14,7 +14,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: MiddlewareTCP
 metadata:
-  name: ip-whitelist-tcp
+  name: ip-whitelist-tcp-data
   namespace: data
 spec:
   ipWhiteList:

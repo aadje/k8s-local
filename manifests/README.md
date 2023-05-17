@@ -54,7 +54,7 @@ kubectl get secret wildcard-k8slocal-com -n kube-system -o "jsonpath={.data['tls
 openssl pkcs8 -inform PEM -topk8 -in ../env/tls.key -out ../env/tls-pkcs8.key -passin pass:123 -passout pass:123
 
 # Add Hostsfile entries using hostsfile script from https://gist.github.com/aadje/a906790b4b111c03acd81d07bc446756
-hf add traefik,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda,hello-django,hello-flask,hello-asp -f
+hf add traefik,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda,hello-django,hello-flask,hello-asp,hello-nextjs -f
 
 # Test tcp routes
 redis-cli -h redis.k8slocal.com
