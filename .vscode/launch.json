@@ -33,32 +33,33 @@
             "request": "attach"
         },
         {
-            "name": "Django hello localhost 8000",
+            "name": "Django hello http",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/hello_django",
             "program": "manage.py",
             "args": [
-                "runserver"
+                "runserver",
+                "0.0.0.0:3002"
             ],
             "django": true,
             "justMyCode": true
         },
         {
-            // python -m manage runserver_plus --cert-file ../env/tls.crt --key-file ../env/tls.key hello-django.k8slocal.com:443
+            // python -m manage runserver_plus --cert-file ../env/tls.crt --key-file ../env/tls.key dev-hello-django.k8slocal.com:443
             "name": "Django hello https",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/hello_django",
             "program": "manage.py",
             "args": [
-                "runserver_plus", "--cert-file", "../env/tls.crt", "--key-file", "../env/tls.key", "hello-django.k8slocal.com:443"
+                "runserver_plus", "--cert-file", "../env/tls.crt", "--key-file", "../env/tls.key", "dev-hello-django.k8slocal.com:443"
             ],
             "django": true,
             "justMyCode": true
         },
         {
-            "name": "Flask hello localhost 5000",
+            "name": "Flask hello http",
             "type": "python",
             "request": "launch",
             "module": "flask",
@@ -69,13 +70,15 @@
             },
             "args": [
                 "run",
+                "--host", "0.0.0.0",
+                "--port", "3003",
                 "--no-debugger"
             ],
             "jinja": false,
             "justMyCode": true
         },
         {
-            // flask run --host hello-flask.k8slocal.com --port 443 --cert ../../env/tls.crt --key ../../env/tls.key
+            // flask run --host dev-hello-flask.k8slocal.com --port 443 --cert ../../env/tls.crt --key ../../env/tls.key
             "name": "Flask hello https",
             "type": "python",
             "request": "launch",
@@ -88,7 +91,7 @@
             "args": [
                 "run",
                 "--no-debugger", 
-                "--host", "hello-flask.k8slocal.com",
+                "--host", "dev-hello-flask.k8slocal.com",
                 "--port", "443",
                 "--cert", "${workspaceFolder}/env/tls.crt",
                 "--key", "${workspaceFolder}/env/tls.key"
