@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: lcl
+  name: lcl-hello
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: dev
+  name: dev-hello
