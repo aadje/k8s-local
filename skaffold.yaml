@@ -1,0 +1,27 @@
+apiVersion: skaffold/v4beta5
+kind: Config
+metadata:
+  name: k8s-local
+build:
+  local:
+    push: false
+  tagPolicy:
+    envTemplate:
+      template: "latest"
+  artifacts:
+    - image: hello-asp
+      context: hello_asp
+      docker:
+        dockerfile: Dockerfile
+#    - image: hello-django
+#      context: hello_django
+#      docker:
+#        dockerfile: Dockerfile
+    - image: hello-flask
+      context: hello_flask
+      docker:
+        dockerfile: Dockerfile
+    - image: hello-nextjs
+      context: hello_nextjs
+      docker:
+        dockerfile: Dockerfile
