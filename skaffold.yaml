@@ -13,10 +13,10 @@ build:
       context: hello_asp
       docker:
         dockerfile: Dockerfile
-#    - image: hello-django
-#      context: hello_django
-#      docker:
-#        dockerfile: Dockerfile
+    - image: hello-django
+      context: hello_django
+      docker:
+        dockerfile: Dockerfile
     - image: hello-flask
       context: hello_flask
       docker:
@@ -25,3 +25,9 @@ build:
       context: hello_nextjs
       docker:
         dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - manifests/services/hello-asp.yaml
+    - manifests/services/hello-django.yaml
+    - manifests/services/hello-flask.yaml
+    - manifests/services/hello-nextjs.yaml
