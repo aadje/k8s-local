@@ -9,4 +9,11 @@ spec:
   version: 1.0.43
   targetNamespace: kube-system
   valuesContent: |-
-    service.type: ClusterIP
+    service:
+      type: ClusterIP
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hosts:
+      - host: portainer.k8slocal.com
+        paths: /
