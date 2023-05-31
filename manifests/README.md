@@ -18,6 +18,7 @@ kubectl apply -k .
 
 ## Apply per groups
 kubectl apply -f ./system/sealed-secrets-helm-chart.yaml
+kubectl apply -f ./system/portainer
 kubectl apply -k ./system/cert-manager
 kubectl apply -k ./system/traefik
 kubectl apply -k ./data
