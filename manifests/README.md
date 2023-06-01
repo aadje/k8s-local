@@ -13,12 +13,14 @@ kubectl label secret -n kube-system sealed-secrets-key sealedsecrets.bitnami.com
 code ./system/cert-manager/acme-issuer.yaml
 git update-index --skip-worktree ./system/cert-manager/acme-issuer.yaml
 
+## Install portainer
+kubectl apply -f ./system/portainer.yaml
+
 ## Apply all
 kubectl apply -k .
 
 ## Apply per groups
 kubectl apply -f ./system/sealed-secrets-helm-chart.yaml
-kubectl apply -f ./system/portainer
 kubectl apply -k ./system/cert-manager
 kubectl apply -k ./system/traefik
 kubectl apply -k ./data
