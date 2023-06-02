@@ -50,7 +50,7 @@ wsl -d rancher-desktop rm -r "/var/lib/mysql"
 python manage.py migrate
 
 # Add Hostsfile entries using hostsfile script from https://gist.github.com/aadje/a906790b4b111c03acd81d07bc446756
-hf add traefik,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda -f
+hf add traefik,portainer,mysql,rabbitmq,redis,elasticsearch6,kafka,kafdrop,redpanda -f
 hf add lcl-hello-django,lcl-hello-flask,lcl-hello-asp,lcl-hello-nextjs, dev-hello-django,dev-hello-flask,dev-hello-asp,dev-hello-nextjs -f
 
 # Test tcp routes

@@ -4,3 +4,4 @@ resources:
 - helm-chart.yaml
 - acme-issuer.yaml
 - wildcard-k8slocal-com-certificate.yaml
+- wildcard-local-k8slocal-com-certificate.yaml

@@ -42,8 +42,25 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
 spec:
   ingressClassName: traefik
+  tls:
+  - hosts:
+    - dev-hello-asp.k8slocal.com
+    secretName: wildcard-k8slocal-com
+  - hosts:
+    - dev-asp.local.k8slocal.com
+    secretName: wildcard-local-k8slocal-com
   rules:
   - host: dev-hello-asp.k8slocal.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: hello-asp
+            port:
+              number: 80
+  - host: dev-asp.local.k8slocal.com
     http:
       paths:
       - pathType: Prefix
