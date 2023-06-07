@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - image: hello-flask:latest
-        name: app
+        name: hello-flask
         imagePullPolicy: Never
         ports:
         - containerPort: 5000

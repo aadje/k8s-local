@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - image: hello-asp:latest
-        name: app
+        name: hello-asp
         imagePullPolicy: Never
         ports:
         - containerPort: 80

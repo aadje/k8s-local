@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - image: hello-nextjs:latest
-        name: app
+        name: hello-nextjs
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
