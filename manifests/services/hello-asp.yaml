@@ -44,9 +44,6 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - dev-hello-asp.k8slocal.com
-    secretName: wildcard-k8slocal-com
-  - hosts:
     - dev-asp.local.k8slocal.com
     secretName: wildcard-local-k8slocal-com
   rules:

@@ -1,7 +1,9 @@
 resources:
 - azure-dnsconfig-secret.yaml
 - cert-manager.crds.yaml
-- helm-chart.yaml
-- acme-issuer.yaml
+- reflector-helm-chart.yaml
+- cert-manager-helm-chart.yaml
+- wildcard-k8slocal-com-acme-issuer.yaml
 - wildcard-k8slocal-com-certificate.yaml
+- wildcard-local-k8slocal-com-acme-issuer.yaml
 - wildcard-local-k8slocal-com-certificate.yaml

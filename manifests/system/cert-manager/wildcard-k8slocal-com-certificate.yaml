@@ -16,5 +16,5 @@ spec:
     - key encipherment
     - server auth
   issuerRef:
-    name: acme-issuer
+    name: wildcard-k8slocal-com-acme-issuer
     kind: Issuer
